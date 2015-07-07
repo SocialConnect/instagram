@@ -1,0 +1,13 @@
+{
+    "name": "socialconnect/instagram",
+    "description": "Awesome SDK to work with Instagram social network",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dmitry Patsura",
+            "email": "talk@dmtry.me"
+        }
+    ],
+    "require": {}
+}
