@@ -9,5 +9,14 @@
             "email": "talk@dmtry.me"
         }
     ],
-    "require": {}
+    "require": {
+        "php": ">=5.4",
+        "ext-json": "*",
+        "socialconnect/common": "~0.2.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "SocialConnect\\Instagram\\": "src/"
+        }
+    }
 }
