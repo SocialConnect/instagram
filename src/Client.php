@@ -6,6 +6,7 @@
 
 namespace SocialConnect\Instagram;
 
+use InvalidArgumentException;
 use SocialConnect\Common\HttpClient;
 
 class Client extends \SocialConnect\Common\ClientAbstract
@@ -23,7 +24,7 @@ class Client extends \SocialConnect\Common\ClientAbstract
     protected function checkLimit($limit)
     {
         if (!is_int($limit) || $limit <= 0) {
-            throw new \InvalidArgumentException('$limit must be > 0, actual: ' . $limit);
+            throw new InvalidArgumentException('$limit must be > 0, actual: ' . $limit);
         }
     }
 
