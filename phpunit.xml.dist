@@ -26,10 +26,10 @@
     </filter>
 
     <php>
-        <var name="applicationId" value=""/>
-        <var name="applicationSecret" value="" />
+        <var name="applicationId" value="5d1357e83ce4497284e90274b9ff083e"/>
+        <!--<var name="applicationSecret" value="" />-->
         <var name="testUserId" value="715473058" />
-        <var name="testUserAccessToken" value="" />
+        <!--<var name="testUserAccessToken" value="" />-->
     </php>
 
     <logging>
