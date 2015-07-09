@@ -10,7 +10,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     protected function getClient()
     {
-        $client = new \SocialConnect\Instagram\Client($GLOBALS['applicationId'], $GLOBALS['applicationSecret']);
+        $client = new \SocialConnect\Instagram\Client(getenv('applicationId'), getenv('applicationSecret'));
         $client->setHttpClient(new SocialConnect\Common\Http\Client\Curl());
 
         return $client;
@@ -21,7 +21,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     protected function getAccessToken()
     {
-        return $GLOBALS['testUserAccessToken'];
+        return getenv('testUserAccessToken');
     }
 
 
@@ -30,7 +30,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     protected function getDemoUserId()
     {
-        return $GLOBALS['testUserId'];
+        return getenv('testUserId');
     }
 
     public function testRequestMethod()
