@@ -13,7 +13,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     protected function getClient()
     {
         $client = new \SocialConnect\Instagram\Client(getenv('applicationId'), getenv('applicationSecret'));
-        $client->setHttpClient(new SocialConnect\Common\Http\Client\Curl());
+        $client->setHttpClient(new \SocialConnect\Common\Http\Client\Curl());
 
         return $client;
     }
