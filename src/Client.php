@@ -96,11 +96,34 @@ class Client extends \SocialConnect\Common\ClientAbstract
         return $this->request('users/' . $id);
     }
 
-    public function getUserFeed($limit = null)
+    /**
+     * See the authenticated user's feed.
+     *
+     * @link https://instagram.com/developer/endpoints/users/#get_users_feed
+     *
+     * @param integer|null $limit
+     * @param integer|null $minId
+     * @param integer|null $maxId
+     * @return bool|object
+     * @throws \Exception
+     */
+    public function getUserFeed($limit = null, $minId = null, $maxId = null)
     {
+        $parameters = [];
         if (!is_null($limit)) {
             $this->checkLimit($limit);
+            $parameters['count'] = $limit;
         }
+
+        if ($minId) {
+            $parameters['min_id'] = $minId;
+        }
+
+        if ($maxId) {
+            $parameters['min_id'] = $maxId;
+        }
+
+        return $this->request('users/self/feed');
     }
 
     public function getUserMedia($id = 'self', $limit = null)
