@@ -110,16 +110,16 @@ class Client extends \SocialConnect\Common\ClientAbstract
     public function getUserFeed($limit = null, $minId = null, $maxId = null)
     {
         $parameters = [];
-        if (!is_null($limit)) {
+        if ($limit !== null) {
             $this->checkLimit($limit);
             $parameters['count'] = $limit;
         }
 
-        if ($minId) {
+        if ($minId !== null) {
             $parameters['min_id'] = $minId;
         }
 
-        if ($maxId) {
+        if ($maxId !== null) {
             $parameters['min_id'] = $maxId;
         }
 
