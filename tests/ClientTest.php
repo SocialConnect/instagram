@@ -35,12 +35,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         return getenv('testUserId');
     }
 
-    public function testRequestMethod()
+    protected function assertUser($user)
     {
-        $client = $this->getClient();
-        $client->setAccessToken($this->getAccessToken());
-
-        $user = $client->request('users/' . $this->getDemoUserId());
         $this->assertInternalType('object', $user);
         $this->assertInternalType('string', $user->username);
         $this->assertInternalType('string', $user->bio);
@@ -50,18 +46,39 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertInternalType('object', $user->counts);
     }
 
+    public function testRequestMethod()
+    {
+        $client = $this->getClient();
+        $client->setAccessToken($this->getAccessToken());
+
+        $user = $client->request('users/' . $this->getDemoUserId());
+        $this->assertUser($user);
+    }
+
     public function testGetUser()
     {
         $client = $this->getClient();
         $client->setAccessToken($this->getAccessToken());
 
         $user = $client->getUser($this->getDemoUserId());
-        $this->assertInternalType('object', $user);
-        $this->assertInternalType('string', $user->username);
-        $this->assertInternalType('string', $user->bio);
-        $this->assertInternalType('string', $user->website);
-        $this->assertInternalType('string', $user->profile_picture);
-        $this->assertInternalType('string', $user->full_name);
-        $this->assertInternalType('object', $user->counts);
+        $this->assertUser($user);
+    }
+
+    public function testGetUserSelf()
+    {
+        $client = $this->getClient();
+        $client->setAccessToken($this->getAccessToken());
+
+        $user = $client->getUser('self');
+        $this->assertUser($user);
+    }
+
+    public function testGetUserWithoutParameters()
+    {
+        $client = $this->getClient();
+        $client->setAccessToken($this->getAccessToken());
+
+        $user = $client->getUser();
+        $this->assertUser($user);
     }
 }
