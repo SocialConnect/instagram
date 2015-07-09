@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1436429643">
+  <project timestamp="1436429643">
+    <file name="/home/ovr/projects/socialconnect/instagram/tests/Bootstrap.php">
+      <line num="3" type="stmt" count="0"/>
+      <metrics loc="3" ncloc="3" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="1" coveredelements="0"/>
+    </file>
+    <file name="/home/ovr/projects/socialconnect/instagram/tests/ClientTest.php">
+      <class name="ClientTest" namespace="global">
+        <metrics methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+      </class>
+      <line num="8" type="method" name="testGetUser" crap="1" count="1"/>
+      <line num="10" type="stmt" count="1"/>
+      <line num="11" type="stmt" count="1"/>
+      <metrics loc="11" ncloc="8" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+    </file>
+    <metrics files="2" loc="14" ncloc="11" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="2" elements="4" coveredelements="3"/>
+  </project>
+</coverage>
