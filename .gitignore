@@ -2,4 +2,5 @@
 .idea
 composer.lock
 clover.xml
+coverage.clover
 phpunit.xml
