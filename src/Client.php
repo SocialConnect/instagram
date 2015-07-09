@@ -71,11 +71,19 @@ class Client extends \SocialConnect\Common\ClientAbstract
         }
     }
 
+    /**
+     * @param $name
+     * @param null $limit
+     * @return bool|mixed
+     * @throws \Exception
+     */
     public function searchUser($name, $limit = null)
     {
         if (!is_null($limit)) {
             $this->checkLimit($limit);
         }
+
+        return $this->request('users/search', ['name' => $name]);
     }
 
     /**
