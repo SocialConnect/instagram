@@ -33,18 +33,33 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         return $GLOBALS['testUserId'];
     }
 
-    public function testGetUser()
+    public function testRequestMethod()
     {
         $client = $this->getClient();
         $client->setAccessToken($this->getAccessToken());
 
         $user = $client->request('users/' . $this->getDemoUserId());
-        $this->assertTrue($user);
+        $this->assertInternalType('object', $user);
         $this->assertInternalType('string', $user->username);
         $this->assertInternalType('string', $user->bio);
         $this->assertInternalType('string', $user->website);
         $this->assertInternalType('string', $user->profile_picture);
         $this->assertInternalType('string', $user->full_name);
-        $this->assertInternalType('array', $user->counts);
+        $this->assertInternalType('object', $user->counts);
+    }
+
+    public function testGetUser()
+    {
+        $client = $this->getClient();
+        $client->setAccessToken($this->getAccessToken());
+
+        $user = $client->getUser($this->getDemoUserId());
+        $this->assertInternalType('object', $user);
+        $this->assertInternalType('string', $user->username);
+        $this->assertInternalType('string', $user->bio);
+        $this->assertInternalType('string', $user->website);
+        $this->assertInternalType('string', $user->profile_picture);
+        $this->assertInternalType('string', $user->full_name);
+        $this->assertInternalType('object', $user->counts);
     }
 }

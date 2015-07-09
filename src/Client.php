@@ -78,9 +78,14 @@ class Client extends \SocialConnect\Common\ClientAbstract
         }
     }
 
-    public function getUser($id = 0)
+    /**
+     * @param string $id
+     * @return bool|mixed
+     * @throws \Exception
+     */
+    public function getUser($id = 'self')
     {
-
+        return $this->request('users/' . $id);
     }
 
     public function getUserFeed($limit = null)
