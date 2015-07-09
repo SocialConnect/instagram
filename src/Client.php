@@ -55,7 +55,7 @@ class Client extends \SocialConnect\Common\ClientAbstract
                 if ($json->data) {
                     return $json->data;
                 }
-                
+
                 throw new \Exception($response);
             } else {
                 throw new \Exception($response);
