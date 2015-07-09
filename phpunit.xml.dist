@@ -10,7 +10,7 @@
          bootstrap="./tests/Bootstrap.php"
         >
     <testsuites>
-        <testsuite name="Vk Test Case">
+        <testsuite name="Instagram Test Case">
             <directory>./tests/</directory>
         </testsuite>
     </testsuites>
