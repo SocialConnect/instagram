@@ -3,6 +3,8 @@
  * @author Patsura Dmitry <talk@dmtry.me>
  */
 
+namespace TestInstagram;
+
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
