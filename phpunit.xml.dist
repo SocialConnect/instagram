@@ -28,7 +28,7 @@
     <php>
         <var name="applicationId" value=""/>
         <var name="applicationSecret" value="" />
-        <var name="testUserId" value="" />
+        <var name="testUserId" value="715473058" />
         <var name="testUserAccessToken" value="" />
     </php>
 
