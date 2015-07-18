@@ -82,12 +82,29 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertUser($user);
     }
 
-    public function testGet()
+    public function testGetUserMediaRecent()
     {
         $client = $this->getClient();
         $client->setAccessToken($this->getAccessToken());
 
         $result = $client->getUserMediaRecent($this->getDemoUserId());
+        $this->assertInternalType('array', $result);
+        $this->assertTrue(count($result) > 10);
+
+        foreach ($result as $row) {
+            $this->assertInternalType('object', $row);
+        }
+    }
+
+    /**
+     * Get my own user media by $token
+     */
+    public function testGetUserMediaLiked()
+    {
+        $client = $this->getClient();
+        $client->setAccessToken($this->getAccessToken());
+
+        $result = $client->getUserMediaLiked();
         $this->assertInternalType('array', $result);
         $this->assertTrue(count($result) > 10);
 
