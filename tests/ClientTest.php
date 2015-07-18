@@ -113,6 +113,26 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    public function testGetMediaSuccess()
+    {
+        $client = $this->getClient();
+        $client->setAccessToken($this->getAccessToken());
+
+        $result = $client->getMedia('1031840824432438724_5120682');
+        $this->assertInstanceOf('SocialConnect\Instagram\Entity\Media', $result);
+    }
+
+    public function testGetMediasWrong()
+    {
+        $this->setExpectedException('\Exception', 'invalid media id', 400);
+
+        $client = $this->getClient();
+        $client->setAccessToken($this->getAccessToken());
+
+        $result = $client->getMedia('111111111111111111_1111111');
+        $this->assertFalse($result);
+    }
+
     /**
      * Get my own user media by $token
      */
