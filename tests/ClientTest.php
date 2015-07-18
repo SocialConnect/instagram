@@ -28,11 +28,11 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @return mixed
+     * @return integer
      */
     protected function getDemoUserId()
     {
-        return getenv('testUserId');
+        return (int) getenv('testUserId');
     }
 
     protected function assertUser($user)
@@ -80,5 +80,19 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $user = $client->getUser();
         $this->assertUser($user);
+    }
+
+    public function testGet()
+    {
+        $client = $this->getClient();
+        $client->setAccessToken($this->getAccessToken());
+
+        $result = $client->getUserMediaRecent($this->getDemoUserId());
+        $this->assertInternalType('array', $result);
+        $this->assertTrue(count($result) > 10);
+
+        foreach ($result as $row) {
+            $this->assertInternalType('object', $row);
+        }
     }
 }
