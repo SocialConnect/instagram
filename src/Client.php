@@ -198,18 +198,40 @@ class Client extends \SocialConnect\Common\ClientAbstract
         }
     }
 
+    /**
+     * @link https://instagram.com/developer/endpoints/relationships/#get_users_follows
+     * Get the list of users this user follows.
+     *
+     * @param string $id
+     * @param null $limit
+     * @return bool|mixed
+     * @throws \Exception
+     */
     public function getUserFollows($id = 'self', $limit = null)
     {
         if (!is_null($limit)) {
             $this->checkLimit($limit);
         }
+
+        return $this->request('users/' . $id . '/follows', [], true);
     }
 
-    public function getUserFollower($id = 'self', $limit = null)
+    /**
+     * @link https://instagram.com/developer/endpoints/relationships/#get_users_followed_by
+     * Get the list of users this user is followed by.
+     *
+     * @param string $id
+     * @param null $limit
+     * @return bool|mixed
+     * @throws \Exception
+     */
+    public function getUserFollowedBy($id = 'self', $limit = null)
     {
         if (!is_null($limit)) {
             $this->checkLimit($limit);
         }
+
+        return $this->request('users/' . $id . '/followed-by', [], true);
     }
 
     /**
