@@ -126,11 +126,43 @@ class Client extends \SocialConnect\Common\ClientAbstract
         return $this->request('users/self/feed');
     }
 
-    public function getUserMedia($id = 'self', $limit = null)
+    /**
+     * @link https://instagram.com/developer/endpoints/users/#get_users_media_recent
+     *
+     * @param integer $id
+     * @param null $limit
+     * @param array $parameters
+     * @return bool|mixed
+     * @throws \Exception|\InvalidArgumentException
+     */
+    public function getUserMediaRecent($id = 1, array $parameters = [], $limit = null)
+    {
+        if (!is_int($id)) {
+            throw new InvalidArgumentException('$id must be an integer type');
+        }
+
+        if (!is_null($limit)) {
+            $this->checkLimit($limit);
+        }
+
+        return $this->request('users/' . $id . '/media/recent', [], true);
+    }
+
+
+    /**
+     * @link https://instagram.com/developer/endpoints/users/#get_users_feed_liked
+     *
+     * @param integer|null $limit
+     * @return bool|mixed
+     * @throws \Exception
+     */
+    public function getUserMediaLiked($limit = null)
     {
         if (!is_null($limit)) {
             $this->checkLimit($limit);
         }
+
+        return $this->request('users/self/media/liked', [], true);
     }
 
     public function getUserLikes($limit = 0)
