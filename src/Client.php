@@ -9,6 +9,7 @@ namespace SocialConnect\Instagram;
 use InvalidArgumentException;
 use SocialConnect\Common\HttpClient;
 use SocialConnect\Common\Hydrator\CloneObjectMap;
+use SocialConnect\Common\Hydrator\ObjectMap;
 
 class Client extends \SocialConnect\Common\ClientAbstract
 {
@@ -48,8 +49,14 @@ class Client extends \SocialConnect\Common\ClientAbstract
         $response = $this->httpClient->request($this->apiUrl . $uri . '?' . http_build_query($parameters), []);
         if ($response) {
             if ($response->isServerError()) {
-                throw new \Exception($response);
+                $body = $response->getBody();
+                if ($body) {
+                    throw new \Exception($body);
+                }
+
+                throw new \Exception('Unexpected server error with code : ' . $response->getStatusCode());
             }
+
             $body = $response->getBody();
             if ($body) {
                 $json = json_decode($body);
@@ -193,12 +200,18 @@ class Client extends \SocialConnect\Common\ClientAbstract
      * Get information about a media object. The returned type key will allow you to differentiate between image and video media.
      *
      * @param $mediaId
-     * @return bool|mixed
+     * @return Entity\Media|bool
      * @throws \Exception
      */
     public function getMedia($mediaId)
     {
-        return $this->request('media/' . $mediaId, [], true);
+        $result = $this->request('media/' . $mediaId, [], true);
+        if ($result) {
+            $hydrator = new \SocialConnect\Common\Hydrator\ObjectMap(array());
+            return $hydrator->hydrate(new Entity\Media(), $result);
+        }
+
+        return false;
     }
 
     /**
