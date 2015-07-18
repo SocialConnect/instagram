@@ -8,6 +8,11 @@ namespace TestInstagram;
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
+     * @var string
+     */
+    const USER_ENTITY_CLASS = 'SocialConnect\Instagram\Entity\User';
+
+    /**
      * @return \SocialConnect\Instagram\Client
      */
     protected function getClient()
@@ -60,8 +65,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client = $this->getClient();
         $client->setAccessToken($this->getAccessToken());
 
-        $user = $client->getUser($this->getDemoUserId());
-        $this->assertUser($user);
+        $this->assertInstanceOf(self::USER_ENTITY_CLASS, $client->getUser($this->getDemoUserId()));
     }
 
     public function testGetUserSelf()

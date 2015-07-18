@@ -9,7 +9,7 @@ namespace SocialConnect\Instagram;
 use InvalidArgumentException;
 use SocialConnect\Common\HttpClient;
 use SocialConnect\Common\Hydrator\CloneObjectMap;
-use SocialConnect\Common\Hydrator\ObjectMap;
+use SocialConnect\Common\Hydrator;
 
 class Client extends \SocialConnect\Common\ClientAbstract
 {
@@ -111,7 +111,14 @@ class Client extends \SocialConnect\Common\ClientAbstract
      */
     public function getUser($id = 'self')
     {
-        return $this->request('users/' . $id);
+        $result = $this->request('users/' . $id);
+        if ($result) {
+            $hydrator = new Hydrator\ObjectMap(array());
+            return $hydrator->hydrate(new Entity\User(), $result);
+        }
+
+        return false;
+
     }
 
     /**
