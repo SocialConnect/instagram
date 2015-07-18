@@ -112,4 +112,21 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             $this->assertInternalType('object', $row);
         }
     }
+
+    /**
+     * Get my own user media by $token
+     */
+    public function testGetMediaPopular()
+    {
+        $client = $this->getClient();
+        $client->setAccessToken($this->getAccessToken());
+
+        $result = $client->getMediaPopular();
+        $this->assertInternalType('array', $result);
+        $this->assertTrue(count($result) > 10);
+
+        foreach ($result as $row) {
+            $this->assertInstanceOf('SocialConnect\Instagram\Entity\Media', $row);
+        }
+    }
 }

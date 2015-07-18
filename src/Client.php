@@ -8,6 +8,7 @@ namespace SocialConnect\Instagram;
 
 use InvalidArgumentException;
 use SocialConnect\Common\HttpClient;
+use SocialConnect\Common\Hydrator\CloneObjectMap;
 
 class Client extends \SocialConnect\Common\ClientAbstract
 {
@@ -201,14 +202,43 @@ class Client extends \SocialConnect\Common\ClientAbstract
     }
 
     /**
+     * @param $result
+     * @param CloneObjectMap $hydrator
+     * @return array|bool
+     */
+    protected function hydrateCollection($result, CloneObjectMap $hydrator)
+    {
+        if (is_array($result) && count($result) > 0) {
+            foreach ($result as $key => $row) {
+                $result[$key] = $hydrator->hydrate($row);
+            }
+
+            return $result;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return CloneObjectMap
+     */
+    protected function getMediaHydrator()
+    {
+        return new CloneObjectMap(array(), new Entity\Media());
+    }
+
+    /**
      * @link https://instagram.com/developer/endpoints/media/#get_media_popular
      * Get a list of what media is most popular at the moment. Can return mix of image and video types.
      *
-     * @return bool|mixed
+     * @return Entity\Media[]|boolean
      * @throws \Exception
      */
     public function getMediaPopular()
     {
-        return $this->request('media/popula', [], true);
+        return $this->hydrateCollection(
+            $this->request('media/popular', [], true),
+            $this->getMediaHydrator()
+        );
     }
 }
