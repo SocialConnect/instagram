@@ -206,13 +206,19 @@ class Client extends \SocialConnect\Common\ClientAbstract
 
         return $this->request('users/self/media/liked', [], true);
     }
-
-
-    public function getUserLikes($limit = 0)
+    
+    /**
+     * @link https://instagram.com/developer/endpoints/likes/#get_media_likes
+     * Get a list of users who have liked this media.
+     *
+     * @param string $mediaId
+     * @param int $limit
+     * @return bool|array
+     * @throws \Exception
+     */
+    public function getMediaLikes($mediaId)
     {
-        if (!is_null($limit)) {
-            $this->checkLimit($limit);
-        }
+        return $this->request('/media/media-id/likes', [], true);
     }
 
     /**
