@@ -60,8 +60,18 @@ class Client extends \SocialConnect\Common\ClientAbstract
             $body = $response->getBody();
             if ($body) {
                 $json = json_decode($body);
-                if ($json->data) {
+                if (isset($json->data)) {
                     return $json->data;
+                } elseif (isset($json->meta)) {
+//                    class stdClass#241 (3) {
+//                        public $error_type =>
+//                        string(16) "APINotFoundError"
+//                        public $code =>
+//                        int(400)
+//                        public $error_message =>
+//                        string(16) "invalid media id"
+//                      }
+                    throw new \Exception($json->meta->error_message, $json->meta->code);
                 }
 
                 throw new \Exception($response);
