@@ -82,10 +82,27 @@ class Client extends \SocialConnect\Common\ClientAbstract
         return false;
     }
 
+    /**
+     * Assert limit
+     *
+     * @param $limit
+     */
     protected function checkLimit($limit)
     {
         if (!is_int($limit) || $limit <= 0) {
             throw new InvalidArgumentException('$limit must be > 0, actual: ' . $limit);
+        }
+    }
+
+    /**
+     * Assert id
+     *
+     * @param $id
+     */
+    protected function assertId($id, $allowSelf = true)
+    {
+        if (!is_int($id) || $id != 'self') {
+            throw new InvalidArgumentException('$id must be integer or self, passed: ' . $limit);
         }
     }
 
@@ -111,6 +128,8 @@ class Client extends \SocialConnect\Common\ClientAbstract
      */
     public function getUser($id = 'self')
     {
+        $this->assertId($id);
+
         $result = $this->request('users/' . $id);
         if ($result) {
             $hydrator = new Hydrator\ObjectMap(array());
@@ -160,11 +179,9 @@ class Client extends \SocialConnect\Common\ClientAbstract
      * @return bool|mixed
      * @throws \Exception|\InvalidArgumentException
      */
-    public function getUserMediaRecent($id = 1, array $parameters = [], $limit = null)
+    public function getUserMediaRecent($id, array $parameters = [], $limit = null)
     {
-        if (!is_int($id)) {
-            throw new InvalidArgumentException('$id must be an integer type');
-        }
+        $this->assertId($id, false);
 
         if (!is_null($limit)) {
             $this->checkLimit($limit);
@@ -209,6 +226,8 @@ class Client extends \SocialConnect\Common\ClientAbstract
      */
     public function getUserFollows($id = 'self', $limit = null)
     {
+        $this->assertId($id, true);
+
         if (!is_null($limit)) {
             $this->checkLimit($limit);
         }
@@ -227,6 +246,8 @@ class Client extends \SocialConnect\Common\ClientAbstract
      */
     public function getUserFollowedBy($id = 'self', $limit = null)
     {
+        $this->assertId($id, true);
+
         if (!is_null($limit)) {
             $this->checkLimit($limit);
         }
