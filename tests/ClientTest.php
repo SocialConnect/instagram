@@ -68,13 +68,12 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(self::USER_ENTITY_CLASS, $client->getUser($this->getDemoUserId()));
     }
 
-    public function testGetUserSelf()
+    public function testGetUserWithSelfParameter()
     {
         $client = $this->getClient();
         $client->setAccessToken($this->getAccessToken());
 
-        $user = $client->getUser('self');
-        $this->assertUser($user);
+        $this->assertInstanceOf(self::USER_ENTITY_CLASS, $client->getUser('self'));
     }
 
     public function testGetUserWithoutParameters()
@@ -82,8 +81,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client = $this->getClient();
         $client->setAccessToken($this->getAccessToken());
 
-        $user = $client->getUser();
-        $this->assertUser($user);
+        $this->assertInstanceOf(self::USER_ENTITY_CLASS, $client->getUser());
     }
 
     public function testGetUserMediaRecent()
