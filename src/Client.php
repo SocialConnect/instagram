@@ -97,12 +97,12 @@ class Client extends \SocialConnect\Common\ClientAbstract
     /**
      * Assert id
      *
-     * @param $id
+     * @param integer|string $id
      */
     protected function assertId($id, $allowSelf = true)
     {
-        if (!is_int($id) || $id != 'self') {
-            throw new InvalidArgumentException('$id must be integer or self, passed: ' . $limit);
+        if (!is_int($id) && $id != 'self') {
+            throw new InvalidArgumentException('$id must be an integer or equal self constant, passed: ' . $id);
         }
     }
 
