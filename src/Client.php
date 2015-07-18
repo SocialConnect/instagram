@@ -29,7 +29,7 @@ class Client extends \SocialConnect\Common\ClientAbstract
     }
 
     /**
-     * @param $uri
+     * @param string $uri
      * @param array $parameters
      * @param bool|false $accessToken
      * @return bool|mixed
@@ -216,7 +216,7 @@ class Client extends \SocialConnect\Common\ClientAbstract
      * @link https://instagram.com/developer/endpoints/media/#get_media
      * Get information about a media object. The returned type key will allow you to differentiate between image and video media.
      *
-     * @param $mediaId
+     * @param string $mediaId
      * @return Entity\Media|bool
      * @throws \Exception
      */
