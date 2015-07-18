@@ -12,7 +12,7 @@
     "require": {
         "php": ">=5.4",
         "ext-json": "*",
-        "socialconnect/common": "~0.3.2",
+        "socialconnect/common": "~0.4",
         "squizlabs/php_codesniffer": "~2.3.3"
     },
     "require-dev": {
