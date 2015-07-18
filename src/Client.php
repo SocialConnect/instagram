@@ -165,6 +165,7 @@ class Client extends \SocialConnect\Common\ClientAbstract
         return $this->request('users/self/media/liked', [], true);
     }
 
+
     public function getUserLikes($limit = 0)
     {
         if (!is_null($limit)) {
@@ -184,5 +185,30 @@ class Client extends \SocialConnect\Common\ClientAbstract
         if (!is_null($limit)) {
             $this->checkLimit($limit);
         }
+    }
+
+    /**
+     * @link https://instagram.com/developer/endpoints/media/#get_media
+     * Get information about a media object. The returned type key will allow you to differentiate between image and video media.
+     *
+     * @param $mediaId
+     * @return bool|mixed
+     * @throws \Exception
+     */
+    public function getMedia($mediaId)
+    {
+        return $this->request('media/' . $mediaId, [], true);
+    }
+
+    /**
+     * @link https://instagram.com/developer/endpoints/media/#get_media_popular
+     * Get a list of what media is most popular at the moment. Can return mix of image and video types.
+     *
+     * @return bool|mixed
+     * @throws \Exception
+     */
+    public function getMediaPopular()
+    {
+        return $this->request('media/popula', [], true);
     }
 }
