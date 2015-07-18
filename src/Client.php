@@ -7,6 +7,7 @@
 namespace SocialConnect\Instagram;
 
 use InvalidArgumentException;
+use SocialConnect\Common\Http\Client\Client as AbstractHttpClient;
 use SocialConnect\Common\HttpClient;
 use SocialConnect\Common\Hydrator\CloneObjectMap;
 use SocialConnect\Common\Hydrator;
@@ -35,18 +36,12 @@ class Client extends \SocialConnect\Common\ClientAbstract
      * @return bool|mixed
      * @throws \Exception
      */
-    public function request($uri, array $parameters = array(), $accessToken = false)
+    public function request($uri, array $parameters = array(), $accessToken = false, $method = AbstractHttpClient::GET)
     {
         $parameters['client_id'] = $this->appId;
         $parameters['access_token'] = $this->accessToken;
 
-        foreach ($parameters as $key => $parameter) {
-            if (is_array($parameter)) {
-                $parameters[$key] = implode(',', $parameter);
-            }
-        }
-
-        $response = $this->httpClient->request($this->apiUrl . $uri . '?' . http_build_query($parameters), []);
+        $response = $this->httpClient->request($this->apiUrl . $uri, $parameters, $method);
         if ($response) {
             if ($response->isServerError()) {
                 $body = $response->getBody();
@@ -206,7 +201,7 @@ class Client extends \SocialConnect\Common\ClientAbstract
 
         return $this->request('users/self/media/liked', [], true);
     }
-    
+
     /**
      * @link https://instagram.com/developer/endpoints/likes/#get_media_likes
      * Get a list of users who have liked this media.
@@ -218,7 +213,20 @@ class Client extends \SocialConnect\Common\ClientAbstract
      */
     public function getMediaLikes($mediaId)
     {
-        return $this->request('/media/media-id/likes', [], true);
+        return $this->request('/media/' . $mediaId . '/likes', [], true);
+    }
+
+    /**
+     * @link https://instagram.com/developer/endpoints/likes/#delete_likes
+     * Remove a like on this media by the currently authenticated user.
+     *
+     * @param $mediaId
+     * @return mixed
+     * @throws \Exception
+     */
+    public function removeMediaLike($mediaId)
+    {
+        return $this->request('/media/' . $mediaId . '/likes', [], true, AbstractHttpClient::POST);
     }
 
     /**

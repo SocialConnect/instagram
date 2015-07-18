@@ -5,6 +5,8 @@
 
 namespace TestInstagram;
 
+use SocialConnect\Instagram\Client;
+
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -13,11 +15,11 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     const USER_ENTITY_CLASS = 'SocialConnect\Instagram\Entity\User';
 
     /**
-     * @return \SocialConnect\Instagram\Client
+     * @return Client
      */
     protected function getClient()
     {
-        $client = new \SocialConnect\Instagram\Client(getenv('applicationId'), getenv('applicationSecret'));
+        $client = new Client(getenv('applicationId'), getenv('applicationSecret'));
         $client->setHttpClient(new \SocialConnect\Common\Http\Client\Curl());
 
         return $client;
