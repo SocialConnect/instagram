@@ -24,7 +24,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     protected function getAccessToken()
     {
