@@ -21,8 +21,11 @@ Available methods:
 - [X] getMedia
 - [X] getMediaPopular
 
-Installation
-------------
+## Authentication
+
+This library is SDK, see OAuth provider in [socialconnect/auth](https://github.com/socialconnect/auth) project.
+
+## Installation
 
 Add a requirement to your `composer.json`:
 
