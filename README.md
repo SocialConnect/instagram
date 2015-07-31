@@ -5,7 +5,21 @@
 [![Latest Stable Version](https://poser.pugx.org/socialconnect/instagram/v/stable.svg)](https://packagist.org/packages/socialconnect/instagram)
 [![License](https://poser.pugx.org/SocialConnect/instagram/license.svg)](https://packagist.org/packages/socialconnect/instagram)
 
-Awesome SDK to work with Instagram social network.
+> Awesome SDK to work with Instagram social network
+
+Available methods:
+
+- [X] searchUser
+- [X] getUser
+- [X] getUserFeed
+- [X] getUserMediaRecent
+- [X] getUserMediaLiked
+- [X] getMediaLikes
+- [X] removeMediaLike
+- [X] getUserFollows
+- [X] getUserFollowedBy
+- [X] getMedia
+- [X] getMediaPopular
 
 Installation
 ------------
